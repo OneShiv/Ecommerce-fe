@@ -1,0 +1,16 @@
+.card {
+    max-width: 720px;
+    margin: auto;
+}
+
+.user__links__list {
+    list-style-type: none;
+}
+.user__link__item {
+    padding: 8px;
+    border-bottom: 1px black dotted;
+}
+.user__link__item a {
+    text-decoration: none;
+    color: black;
+}
