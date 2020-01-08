@@ -5,7 +5,7 @@ import { Paper, Tab, Tabs, } from '@material-ui/core';
 
 import CategoryMenu from '../components/Menu/CategoryMenu';
 
-const Home = () => {
+const Home = (props) => {
     const [value, setValue] = React.useState(0);
     const [productBySale, setProductBySale] = useState([]);
     const [productByArrival, setProductByArrival] = useState([]);
@@ -19,7 +19,6 @@ const Home = () => {
     const loadProductsBySale = () => {
         getProducts('sold', 'desc', 10)
             .then(data => {
-                console.log(data);
                 if (error) {
                     setError(error);
                 } else {
@@ -61,8 +60,8 @@ const Home = () => {
                     <Tab label="RECENTS" />
                 </Tabs>
             </Paper>
-            {value === 0 && <ProductGrid products={productBySale} />}
-            {value === 1 && <ProductGrid products={productByArrival} />}
+            {value === 0 && <ProductGrid history={props.history} products={productBySale} />}
+            {value === 1 && <ProductGrid history={props.history} products={productByArrival} />}
         </div>
     )
 }

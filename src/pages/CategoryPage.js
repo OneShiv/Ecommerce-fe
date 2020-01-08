@@ -46,12 +46,11 @@ const CategoryPage = (props) => {
                     setCatProducts(sortedProds.reverse());
                 }
             }} setRangeCb={(value) => {
-                console.log(products);
                 setFilterByRange(value);
                 let newFilteredValues = products.filter(product => product.price > filterByRange[0] * 1000 && product.price < filterByRange[1] * 1000);
                 setCatProducts(newFilteredValues);
             }} />}
-            <ProductGrid products={catProducts} />
+            <ProductGrid products={catProducts} history={props.history} />
         </div>
     )
 }

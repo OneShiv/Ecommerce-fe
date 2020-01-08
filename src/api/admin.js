@@ -36,3 +36,27 @@ export const createProduct = (userId, token, product) => {
             return err;
         });
 }
+
+export const createOrder = (userId, token, orderData, amount) => {
+    return fetch(`${API}/order/create/${userId}`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            "Content-Type": 'application/json',
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            order: {
+                products: orderData,
+                amount: amount,
+                transaction_id: Date.now()
+            }
+        })
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            return err;
+        });
+}

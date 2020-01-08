@@ -2,7 +2,7 @@ import React from 'react';
 import './Blank.scss';
 
 const Blank = () => (
-    <div class="blank">
+    <div className="blank">
         No results
     </div>
 );

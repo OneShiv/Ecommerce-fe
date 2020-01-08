@@ -8,7 +8,6 @@ export const addItem = (item, next) => {
 
             let elem = cart.find(prod => prod.item._id === item._id);
             // if product found just increment count
-            console.log("elemen:", elem)
             if (elem) {
                 elem.count++;
                 // now go for uniqueness
@@ -22,7 +21,6 @@ export const addItem = (item, next) => {
                         return acc;
                     }
                 }, []);
-                console.log("Updted", cart);
                 localStorage.setItem('cart', JSON.stringify(cart));
             } else {
                 cart = cart.concat({
@@ -42,16 +40,37 @@ export const addItem = (item, next) => {
 }
 
 export const getItemsCart = () => {
-    return JSON.parse(localStorage.getItem('cart'));
+    if (typeof window !== 'undefined') {
+        if (localStorage.getItem('cart')) {
+            return JSON.parse(localStorage.getItem('cart'));
+        } else {
+            return [];
+        }
+    } else {
+        return []
+    }
 }
 
 export const removeItem = (id) => {
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    if (typeof window !== 'undefined') {
+        if (localStorage.getItem('cart')) {
+            const cart = JSON.parse(localStorage.getItem('cart'));
 
-    cart.map((prod, index) => {
-        if (prod.item._id === id) {
-            cart.splice(index, 1);
+            cart.map((prod, index) => {
+                if (prod.item._id === id) {
+                    cart.splice(index, 1);
+                }
+            });
+            localStorage.setItem('cart', JSON.stringify(cart));
+        } else {
+            return [];
         }
-    });
-    localStorage.setItem('cart', JSON.stringify(cart));
+    }
+}
+export const removeAll = () => {
+    if (typeof window !== 'undefined') {
+        if (localStorage.getItem('cart')) {
+            localStorage.removeItem('cart');
+        }
+    }
 }

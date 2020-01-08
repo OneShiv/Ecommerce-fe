@@ -2,10 +2,9 @@ import React from 'react';
 import Card from './ProductCard';
 import { Grid, Paper } from '@material-ui/core'
 import ProductCard from './ProductCard';
-import { Link } from 'react-router-dom';
 import Blank from './Blank';
 
-const ProductGrid = ({ products }) => {
+const ProductGrid = ({ products, history }) => {
     if (!products.length) {
         return <Blank />
     }
@@ -13,7 +12,7 @@ const ProductGrid = ({ products }) => {
         <Grid container spacing={3} style={{ padding: '32px' }}>
             {products.map(product => (
                 <Grid item xs={12} sm={3} key={product._id}>
-                    <Paper><ProductCard {...product} /></Paper>
+                    <Paper><ProductCard history={history} {...product} /></Paper>
                 </Grid>
             ))}
         </Grid>

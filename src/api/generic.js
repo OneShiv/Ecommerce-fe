@@ -67,7 +67,6 @@ export const getProducts = (sortBy, order, limit) => {
 
 export const getProductBySearch = (params) => {
     const query = queryString.stringify(params);
-    console.log(query);
     return fetch(`${API}/products/search?${query}`, {
         method: 'GET'
     })

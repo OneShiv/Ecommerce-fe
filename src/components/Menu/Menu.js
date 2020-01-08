@@ -13,20 +13,19 @@ const Menu = ({ history }) => {
     useEffect(() => {
         setLen(getItemsCart().length);
     }, [len]);
-    console.log(isActive(history, '/') ? 'active' : '');
     return (
         <div className="header-wrapper">
             <Link to="/"><img src={CartImage} alt="my-kart" className="icon" /></Link>
             <nav className="menu">
                 <ul className="menu__list">
                     <li className={`menu__item ${isActive(history, '/') ? 'active' : ''}`}><Link to="/" className="menu__link">Home</Link></li>
-                    <li className={`menu__item ${isActive(history, '/cart') ? 'active' : ''}`}><Link to="/cart" className="menu__link">Cart<span style={{
+                    {isAuthenticated() && <li className={`menu__item ${isActive(history, '/cart') ? 'active' : ''}`}><Link to="/cart" className="menu__link">Cart<span style={{
                         color: 'greenyellow',
                         position: 'relative',
                         padding: 0,
                         top: '-24px',
                         left: '30px'
-                    }}>{len}</span></Link></li>
+                    }}>{len}</span></Link></li>}
                     <li className={`menu__item ${isActive(history, '/search') ? 'active' : ''}`}><Link to="/search" className="menu__link">Search</Link></li>
                     {!isAuthenticated() && <li className={`menu__item ${isActive(history, '/signup') ? 'active' : ''}`}><Link className="menu__link" to="/signup" >SigUp</Link></li>}
                     {!isAuthenticated() && <li className={`menu__item ${isActive(history, '/signin') ? 'active' : ''}`}><Link className="menu__link" to="/signin" >SigIn</Link></li>}

@@ -3,7 +3,6 @@ import { getRelatedProducts } from '../api/generic';
 import ProductsGrid from '../components/ProductGrid';
 const RelatedProducts = (props) => {
     const { _id } = props;
-    console.log(props);
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(false);
     useEffect(() => {
@@ -18,7 +17,7 @@ const RelatedProducts = (props) => {
     return (
         <React.Fragment>
             <h3 style={{ color: 'white' }}>Related Products</h3>
-            {products && <ProductsGrid products={products} />}
+            {products && <ProductsGrid products={products} history={props.history} />}
         </React.Fragment>
     )
 }

@@ -1,16 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { getItemsCart, removeItem } from '../helper';
-
+import { getItemsCart, removeItem, removeAll } from '../helper';
+import { Button, Snackbar } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+import { createOrder } from '../api/admin';
+import { isAuthenticated } from '../auth';
 import './Cart.scss';
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const Cart = () => {
+    let total = 0;
+    const { user, token } = isAuthenticated();
     const [items, setItems] = useState([]);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState(false);
     useEffect(() => {
         setItems(getItemsCart);
-    }, [])
-    let total = 0;
+    }, []);
+    const orderhandler = () => {
+        createOrder(user._id, token, items, total).then(response => {
+            if (response.error) {
+                setError(true);
+            } else {
+                setSuccess(true);
+                setItems([]);
+                removeAll();
+                // window.location.reload();
+            }
+        });
+    }
+    const handleCloseError = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setError(false);
+    };
+    const handleCloseSucess = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSuccess(false);
+    };
     return (
         <div>
+            {error && <div className="errorContain">
+                <Snackbar open={error} autoHideDuration={3000} onClose={handleCloseError}>
+                    <Alert color="error">Something went wrong</Alert>
+                </Snackbar>
+            </div>}
+            {success && <div className="successContain">
+                <Snackbar open={success} autoHideDuration={3000} onClose={handleCloseSucess}>
+                    <Alert color="info" onClose={handleCloseSucess}>
+                        Order Placed SuccssFully.
+                    </Alert>
+                </Snackbar>
+            </div>}
             <div className="Cart-wrap">
                 <div>
                     PRODUCT
@@ -47,7 +92,11 @@ const Cart = () => {
             </div>
 
             <div className="total">
-                Cart Total = Rs {total}.
+                <p>Cart Total = Rs {total}.</p>
+                {items.length !== 0 && <Button variant="contained" color="primary"
+                    onClick={orderhandler}>
+                    Order
+            </Button>}
             </div>
         </div>
     );

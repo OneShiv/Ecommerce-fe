@@ -25,7 +25,6 @@ const SignUp = () => {
         const { name, email, password } = value;
         signup({ name, email, password })
             .then(data => {
-                console.log(data);
                 if (data.err) {
                     setValue({
                         ...value,

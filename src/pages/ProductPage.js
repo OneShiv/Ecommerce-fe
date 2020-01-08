@@ -9,7 +9,7 @@ const ProductPage = (props) => {
     const [productdata, setProductdata] = useState({});
 
     const { productId } = props.match.params;
-    console.log(props);
+
     useEffect(() => {
         getProductById(productId).then(data => {
             if (data.error) {
@@ -24,7 +24,7 @@ const ProductPage = (props) => {
             <CategoryMenu />
             {error && 'Something wriong happened'}
             {!error && <ProductCard {...productdata} />}
-            <RelatedProductsPagePage {...productdata} />
+            <RelatedProductsPagePage {...productdata} history={props.history} />
         </div>
     )
 }

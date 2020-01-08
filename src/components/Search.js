@@ -4,7 +4,7 @@ import { getProductBySearch } from '../api/generic';
 import Card from './ProductCard';
 import ProductGrid from './ProductGrid';
 
-const Search = () => {
+const Search = (props) => {
     const [data, setData] = useState({
         search: '',
         results: [],
@@ -50,6 +50,7 @@ const Search = () => {
         <div className="search-results">
             <form className="form-group" autoComplete="off" onSubmit={submitHandler}>
                 <TextField
+                    inputProps={{ "data-testid": "search-text" }}
                     autoComplete="off"
                     value={data.search}
                     style={{ margin: 8 }}
@@ -60,14 +61,14 @@ const Search = () => {
                     placeholder="Search product"
                     onChange={handleChange('search')}
                 />
-                <Button type="submit" variant="contained" color="primary"
+                <Button data-testid="search-btn" type="submit" variant="contained" color="primary"
                 >
                     Search
                 </Button>
             </form>
             <h2 style={{ color: '#38b692' }}>Results</h2>
-            {data.results.length && data.searched && <p style={{ color: '#00B4DB' }}>{data.results.length} products found</p>}
-            <ProductGrid products={data.results} />
+            <p data-testid="search" style={{ color: '#00B4DB' }}>{data.results.length} products found</p>
+            <ProductGrid products={data.results} history={props.history} />
         </div>
     )
 }
