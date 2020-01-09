@@ -121,16 +121,19 @@ const AddProduct = () => {
         <form className="form-group" autoComplete="off">
             {productData.error && <div className="errorContain">
                 <Snackbar open={productData.error} autoHideDuration={3000} onClose={handleCloseError}>
-                    <Alert color="error">{error}</Alert>
+                    <Alert data-testid="error" color="error">{error}</Alert>
                 </Snackbar>
             </div>}
             {productData.success && <div className="successContain">
                 <Snackbar open={productData.success} autoHideDuration={2000} onClose={handleCloseError}>
-                    <Alert >Product created Successfully</Alert>
+                    <Alert data-testid="success">Product created Successfully</Alert>
                 </Snackbar>
             </div>}
             <h4>Product Form</h4>
             <TextField
+                inputProps={{
+                    "data-testid": "name"
+                }}
                 autoComplete="off"
                 value={name}
                 style={{ margin: 8 }}
@@ -142,6 +145,9 @@ const AddProduct = () => {
                 onChange={changeHandler('name')}
             />
             <TextField
+                inputProps={{
+                    "data-testid": "description"
+                }}
                 multiline
                 rows={2}
                 autoComplete="off"
@@ -155,6 +161,7 @@ const AddProduct = () => {
             />
             <TextField
                 inputProps={{
+                    "data-testid": "price",
                     type: 'number',
                     min: 0,
                     max: 100000
@@ -169,6 +176,7 @@ const AddProduct = () => {
                 onChange={changeHandler('price')}
             />
             <TextField
+                inputProps={{ "data-testid": "categories" }}
                 style={{ margin: 8 }}
                 fullWidth
                 id="select category"
@@ -185,6 +193,7 @@ const AddProduct = () => {
             </TextField>
             <TextField
                 inputProps={{
+                    "data-testid": 'quantity',
                     type: 'number',
                     min: 0,
                     max: 5
@@ -199,6 +208,9 @@ const AddProduct = () => {
                 onChange={changeHandler('quantity')}
             />
             <TextField
+                inputProps={{
+                    "data-testid": 'shipping'
+                }}
                 autoComplete="off"
                 value={shipping}
                 style={{ margin: 8 }}
@@ -214,10 +226,10 @@ const AddProduct = () => {
                 padding: '16px',
                 margin: '8px'
             }}>
-                <input style={{ fontSize: '24px' }}
+                <input data-testid="upload" style={{ fontSize: '24px' }}
                     type="file" name="image" accept="/image/*" onChange={changeHandler('image')} />
             </label>
-            <Button type="submit" variant="contained" color="primary"
+            <Button data-testid="create-product" type="submit" variant="contained" color="primary"
                 onClick={submitHandler}>
                 Create product
             </Button>
