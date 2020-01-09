@@ -78,17 +78,18 @@ const SignUp = () => {
         <form className="form-group" autoComplete="off">
             {value.error && <div className="errorContain">
                 <Snackbar open={value.error.isError} autoHideDuration={3000} onClose={handleCloseError}>
-                    <Alert color="error">{value.error.msg}</Alert>
+                    <Alert data-testid="signup-error" color="error">{value.error.msg}</Alert>
                 </Snackbar>
             </div>}
             {value.success && <div className="errorContain">
                 <Snackbar open={value.success} autoHideDuration={3000} onClose={handleCloseSucess}>
-                    <Alert onClose={handleCloseSucess} color="success">
+                    <Alert data-testid="signup-success" onClose={handleCloseSucess} color="success">
                         User Successfully created
                 </Alert>
                 </Snackbar>
             </div>}
             <TextField
+                inputProps={{ "data-testid": "name" }}
                 value={value.name}
                 style={{ margin: 8 }}
                 fullWidth required
@@ -98,6 +99,7 @@ const SignUp = () => {
                 onChange={handleTextChange('name')}
             />
             <TextField
+                inputProps={{ "data-testid": "email" }}
                 autoComplete="off"
                 value={value.email}
                 style={{ margin: 8 }}
@@ -109,6 +111,7 @@ const SignUp = () => {
                 onChange={handleTextChange('email')}
             />
             <TextField
+                inputProps={{ "data-testid": "password" }}
                 autoComplete="off"
                 value={value.password}
                 style={{ margin: 8 }}
@@ -118,7 +121,7 @@ const SignUp = () => {
                 type="password"
                 onChange={handleTextChange('password')}
             />
-            <Button type="submit" variant="contained" color="primary"
+            <Button data-testid="register" type="submit" variant="contained" color="primary"
                 onClick={submitHandler}>
                 Register
             </Button>

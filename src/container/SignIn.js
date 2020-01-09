@@ -68,16 +68,18 @@ const SignIn = () => {
         });
     };
     const redirectUser = () => {
-        if (value.redirectToReferrer) {
-            if (user && user.role === 1) {
-                return <Redirect to="/admin/dashboard" />;
-            } else {
-                return <Redirect to="/user/dashboard" />;
+        setTimeout(() => {
+            if (value.redirectToReferrer) {
+                if (user && user.role === 1) {
+                    return <Redirect to="/admin/dashboard" />;
+                } else {
+                    return <Redirect to="/user/dashboard" />;
+                }
             }
-        }
-        if (isAuthenticated()) {
-            return <Redirect to="/" />;
-        }
+            if (isAuthenticated()) {
+                return <Redirect to="/" />;
+            }
+        }, 5000);
     }
     const handleCloseError = (event, reason) => {
         if (reason === 'clickaway') {
@@ -96,17 +98,18 @@ const SignIn = () => {
         <form className="form-group" autoComplete="off">
             {value.error && <div className="errorContain">
                 <Snackbar open={value.error.isError} autoHideDuration={3000} onClose={handleCloseError}>
-                    <Alert color="error">{value.error.msg}</Alert>
+                    <Alert data-testid="signin-error" color="error">{value.error.msg}</Alert>
                 </Snackbar>
             </div>}
             {value.success && <div className="successContain">
                 <Snackbar open={value.loading} autoHideDuration={1000} onClose={handleCloseSucess}>
-                    <Alert color="info" onClose={handleCloseSucess}>
+                    <Alert data-testid="signin-success" color="info" onClose={handleCloseSucess}>
                         SignedIn
                     </Alert>
                 </Snackbar>
             </div>}
             <TextField
+                inputProps={{ "data-testid": "email" }}
                 autoComplete="off"
                 value={value.email}
                 style={{ margin: 8 }}
@@ -118,6 +121,7 @@ const SignIn = () => {
                 onChange={handleTextChange('email')}
             />
             <TextField
+                inputProps={{ "data-testid": "password" }}
                 autoComplete="off"
                 value={value.password}
                 style={{ margin: 8 }}
