@@ -4,7 +4,7 @@ import './ShowImage.scss';
 
 const ShowImage = ({ item, url }) => {
     return (<div className="product-img">
-        <img src={`${API}/${url}/image/${item._id}`} alt={item.name} classname="prod-img" />
+        <img src={`${API}/${url}/image/${item._id}`} alt={item.name} className="prod-img" />
     </div>);
 }
 

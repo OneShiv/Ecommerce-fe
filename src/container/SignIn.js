@@ -100,9 +100,9 @@ const SignIn = () => {
                 </Snackbar>
             </div>}
             {value.success && <div className="successContain">
-                <Snackbar open={value.loading} autoHideDuration={3000} onClose={handleCloseSucess}>
+                <Snackbar open={value.loading} autoHideDuration={1000} onClose={handleCloseSucess}>
                     <Alert color="info" onClose={handleCloseSucess}>
-                        Loading ...
+                        SignedIn
                     </Alert>
                 </Snackbar>
             </div>}
@@ -127,7 +127,7 @@ const SignIn = () => {
                 type="password"
                 onChange={handleTextChange('password')}
             />
-            <Button type="submit" variant="contained" color="primary"
+            <Button data-testid="signin" type="submit" variant="contained" color="primary"
                 onClick={submitHandler}>
                 SignIn
             </Button>

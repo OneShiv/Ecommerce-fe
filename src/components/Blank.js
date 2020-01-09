@@ -2,7 +2,8 @@ import React from 'react';
 import './Blank.scss';
 
 const Blank = () => (
-    <div className="blank">
+    <div data-testid=
+        "blank" className="blank">
         No results
     </div>
 );

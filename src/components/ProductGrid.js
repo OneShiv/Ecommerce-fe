@@ -11,7 +11,7 @@ const ProductGrid = ({ products, history }) => {
     return (
         <Grid container spacing={3} style={{ padding: '32px' }}>
             {products.map(product => (
-                <Grid item xs={12} sm={3} key={product._id}>
+                <Grid data-testid="products-grid" item xs={12} sm={3} key={product._id}>
                     <Paper><ProductCard history={history} {...product} /></Paper>
                 </Grid>
             ))}
