@@ -68,18 +68,13 @@ const SignIn = () => {
         });
     };
     const redirectUser = () => {
-        setTimeout(() => {
-            if (value.redirectToReferrer) {
-                if (user && user.role === 1) {
-                    return <Redirect to="/admin/dashboard" />;
-                } else {
-                    return <Redirect to="/user/dashboard" />;
-                }
+        if (value.redirectToReferrer) {
+            if (user && user.role === 1) {
+                return <Redirect to="/admin/dashboard" />;
+            } else {
+                return <Redirect to="/user/dashboard" />;
             }
-            if (isAuthenticated()) {
-                return <Redirect to="/" />;
-            }
-        }, 5000);
+        }
     }
     const handleCloseError = (event, reason) => {
         if (reason === 'clickaway') {
